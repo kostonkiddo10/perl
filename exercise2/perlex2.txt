@@ -1,0 +1,8 @@
+# perlex2.pl - Read and output short words from a wordlist
+
+while(<STDIN>) {
+    chomp($_);
+    if (length($_) <= 7) {
+        print $_, "\n";
+    }
+}

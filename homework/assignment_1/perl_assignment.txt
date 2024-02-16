@@ -1,0 +1,91 @@
+Davian Albarran
+CS-371, Spring 2024
+Perl Assignment
+Due: Fri, Feb 9, 2024, 11:59pm
+
+
+1. What is the effect of having the 'use strict;' pragma in a Perl program? Your answer should focus on how 'use strict;' affects how you use variables in a Perl program. Include all information sources you used to find your answer. A large language model can be a valid source but cannot be the only source for this answer.
+
+'use strict;' tells the Perl interpreter to enforce various rules when executing a Perl script. For example, it requires that the programmer declares variables before using them rather than doing the lazy assignment method.
+
+2. Write a program prob2.pl. In prob2.pl, do Perl exercise 1 again, but this time using the 'use strict;' pragma. Your program must generate the same output as the old "non-strict" version. Include the source code of prob2.pl in perl_assignment.txt, and also dropbox prob2.pl (See note 1 below about dropboxing .pl files).
+
+# Adaptation of Exercise 1 - Davian Albaran, s1302682, CS-371, Spring 2024
+use strict;
+
+# Count word length occurence in a word list.
+# Task 1 - Read each line from input through STDIN.
+
+my @wordlength;
+
+while( my $word = <STDIN> ) {
+    # Task 2 - Get length of each word.
+    chomp($word); # Trims trailing \n in each word
+    my $length = length($word);
+
+    # Task 3 - Increment correct word length array element using $length.
+    $wordlength[$length]++; # @wordlength array is created on the fly.
+}
+
+# Task 4 - After loop, print @wordlength array.
+# Note how PERL does not throw an error when there is no value at a certain index.
+print "Word length \t|\t Occurences\n---------------------------------------------\n"; # Printing column headers.
+for (my $i = 1; $i < $#wordlength; $i++) {
+    print "$i \t\t|\t\t $wordlength[$i] \n";
+}
+
+
+3. Write a program prob3.pl to find the words in english.sorted that contain more than one uppercase letter, such as "ANSI", "Bhagavad-Gita", "DeMorgan", "LaTeX" ... You must use regular expression matching. The program must push the words that you find into an array called @multiupcase, and print the contents of @multiupcase with one space between words. Include the source code of prob3.pl in perl_assignment.txt, and also dropbox prob3.pl. Read the input file through standard input. Use the 'use strict;' pragma in your program.
+
+use strict;
+
+my @multiupcase;
+
+while(my $word = <STDIN>) {
+    chomp($word);
+
+    if ($word =~ m/[A-Z]+/) {
+        push @multiupcase, $word;
+    }
+}
+
+foreach my $upcaseword (@multiupcase) {
+    print "$upcaseword";
+}
+
+4. Write a program prob4.pl to output all words in english.sorted that contain a run of 6 or more consecutive non-vowel characters, where vowels are A, E, I, O, U or Y (case insensitive). You must use regular expression matching. Correct output from the program include words like:
+
+
+         Knightsbridge
+         oughtn't
+
+
+Read the input file through standard input. Use the 'use strict;' pragma in your program.
+
+use strict;
+
+while(my $word  = <STDIN>) {
+    chomp($word);
+
+    if ($word =~ m/^.*[^AEIOUaeiou]{6,}.*$/) {
+        print "$word\n";
+    }
+}
+
+5. Write a program prob5.pl that corrects the broken delimiting in the input file roster_raw.txt. Your program must print the roster with corrected delimiting, i.e., a comma followed by exactly 1 space, no space before commas. You must use regular expression search and replace to correct the delimiting, so don't use the split() function. Include the source code of prob5.pl in perl_assignment.txt, and also dropbox prob4.pl. Use the 'use strict;' pragma in your program.
+
+use strict;
+
+while(my $line = <STDIN>) {
+    chomp($line);
+    $line =~ s/ *, */, /g;
+    print "$line\n";
+}
+
+
+Notes:
+
+
+1. Ecampus won't allow you to dropbox .pl files, so you'll need to rename the .pl files to have a .txt extension, or, you can zip everything up and dropbox one zip file.
+
+2. If you want to login remotely and work in your UNIX account, see https://cssegit.monmouth.edu/cshelp/csseremote/-/wikis/MUCSremote.
