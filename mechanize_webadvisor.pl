@@ -15,4 +15,7 @@ $mech->field("_ctl0:MainContent:ddlTerm", $term); # Populate the field named _ct
 
 # Select the subject
 my $subject = "COMPUTER SCIENCE (CS)"
-$mech->field("_ctl0:MainContent:ddlSubj_1", $subject);
+$mech->field("_ctl0:MainContent:ddlSubj_1", $subject); # Choose CS
+
+# Click the Submit button
+$mech->click_button("_ctl0:MainContent:btnSubmit");
