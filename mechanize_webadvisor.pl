@@ -19,3 +19,9 @@ $mech->field("_ctl0:MainContent:ddlSubj_1", $subject); # Choose CS
 
 # Click the Submit button
 $mech->click_button("_ctl0:MainContent:btnSubmit");
+
+# Get resulting HTML
+my $page = $mech->content();
+
+# Can print or output to file.
+print $page;
